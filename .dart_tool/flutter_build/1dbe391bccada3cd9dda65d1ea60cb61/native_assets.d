@@ -1,0 +1,1 @@
+ C:\\Users\\aniba\\OneDrive\\Escritorio\\Workspace\\Flutter\\binance_api_test\\.dart_tool\\flutter_build\\1dbe391bccada3cd9dda65d1ea60cb61\\native_assets.yaml: 
