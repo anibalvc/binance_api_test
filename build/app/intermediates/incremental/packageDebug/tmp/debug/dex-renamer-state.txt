@@ -1,4 +1,4 @@
-#Thu Apr 25 04:12:42 CST 2024
-base.0=C\:\\Users\\aniba\\OneDrive\\Escritorio\\Workspace\\Flutter\\binance_api_test\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
+#Thu Apr 25 05:25:48 CST 2024
+base.0=C\:\\Users\\aniba\\OneDrive\\Escritorio\\Workspace\\Flutter\\binance_api_test\\binance_api_test\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
 path.0=classes.dex
 renamed.0=classes.dex

@@ -23,6 +23,7 @@ class HomeViewModel extends BaseViewModel {
   final GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
   final _autenticationClient = locator<AuthenticationClient>();
   final _navigationService = locator<NavigatorService>();
+  //Lista de cryptos a consultar
   final cryptos = ['bnb', 'bch', 'qnt', 'ltc', 'sol'];
 
   bool _loading = false;
@@ -52,6 +53,7 @@ class HomeViewModel extends BaseViewModel {
   Future<void> onInit(BuildContext context) async {
     loading = true;
     usuario = _autenticationClient.loadUsuario;
+    //Llamada al web socket de binance
     webApiSocket(context);
     loading = false;
   }
@@ -59,6 +61,7 @@ class HomeViewModel extends BaseViewModel {
   Future<void> moveToCrypto(BuildContext context, CryptoData crypto) async {
     var providerDetallesCrypto =
         Provider.of<DetalleCryptoProvider>(context, listen: false);
+    //Se asigna la crypto y se limpia la lista de cryptos para detalles
     providerDetallesCrypto.setCrypto(crypto: crypto);
     providerDetallesCrypto.cleanList();
     _navigationService.navigateToPageDetalles(
@@ -76,6 +79,7 @@ class HomeViewModel extends BaseViewModel {
         var getData = jsonDecode(message);
         if (cryptosList.any((element) =>
             element.symbol == getData['s'].toString().replaceAll("USDT", ""))) {
+          //se actualiza la crypto si existia previamente
           var replaced = cryptosList.firstWhere((element) =>
               element.symbol == getData['s'].replaceAll("USDT", ""));
           replaced.precio = double.parse(getData['c']);
@@ -86,6 +90,7 @@ class HomeViewModel extends BaseViewModel {
           replaced.porcentaje = double.parse(getData['P']);
           replaced.volumen = double.parse(getData['v']);
         } else {
+          //En caso de no existir, se agrega a la lista
           cryptosList.add(CryptoData(
               symbol: getData['s'].toString().replaceAll("USDT", ""),
               precio: double.parse(getData['c']),
@@ -96,6 +101,7 @@ class HomeViewModel extends BaseViewModel {
               porcentaje: double.parse(getData['P']),
               volumen: double.parse(getData['v'])));
         }
+        //Se agrega la crypto al provider
         providerPreciosCryptos.setCryptos(cryptos: cryptosList);
         notifyListeners();
       }, onError: (error) {
